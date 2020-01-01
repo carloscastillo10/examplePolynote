@@ -61,8 +61,6 @@
   - title: BETA - Adding interactivity to your book pages
     url: /features/interactive_cells
     not_numbered: true
-  - title: BETA - Citations and bibliographies
-    url: /features/citations
     not_numbered: true
   - title: BETA - Using Jupytext for text-based Notebook content
     url: /features/jupytext
