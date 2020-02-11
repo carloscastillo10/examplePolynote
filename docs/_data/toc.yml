@@ -36,26 +36,38 @@
 - divider: true
 
 # Add a header and sample content section
-- header: Documentación
+- header: DOCUMENTACIÓN
 
 # A chapter w/ a collection of sections beneath it
-- title: Instalación y desarrollo
-  url: /features/features
+- title: INSTALACIÓN
+  # url: /features/features
   not_numbered: true
   expand_sections: true
   sections:
-  - title: Instalacion
-    url: /features/instalacion
+  - title: LINUX
+    #url: /features/instalacion
     not_numbered: true
-  - title: Ejemplos
-    url: /features/ejemplos
-    not_numbered: true
-    expand_sections: true
-    sections:
-      - title: Ejemplo1
-        url: pruebaNotebook
-        not_numbered: true
-      - title: Ejemplo2
-        url: /features/CombinarPythonScala
-        not_numbered: true
+
+- divider: true
+
+- tiltle: DESARROLLO
+  # url:
+  not_numbered: true
+  expand_sections: true
+  sections:
+    - title: PYTHON
+      # url: 
+      not_numbered: true
+    - title: SCALA
+      # url: 
+      not_numbered: true
+    - title: VEGA SPEC
+      # url: 
+      not_numbered: true
+    - title: PYTHON - SCALA
+      # url: 
+      not_numbered: true
+    - title: PYTHPON - SCALA - VEGA
+      # url: 
+      not_numbered: true  
 
