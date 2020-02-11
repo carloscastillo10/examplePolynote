@@ -22,12 +22,12 @@
 # See the links below for an example.
 
 # Top-level page
-- title: Inicio
+- title: INICIO
   url: /intro
   not_numbered: true
 
 # External link
-- title: Repositorio GitHub
+- title: REPOSITORIO GITHUB
   url: https://github.com/CarlosCastillo10/examplePolynote
   external: true
   not_numbered: true
@@ -50,7 +50,7 @@
 
 - divider: true
 
-- tiltle: DESARROLLO
+- title: DESARROLLO
   # url:
   not_numbered: true
   expand_sections: true

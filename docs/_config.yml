@@ -30,7 +30,7 @@ url: https://carloscastillo10.github.io/examplePolynote/              # the base
 # Jupyter Book settings
 
 # Main page settings
-footer_text: This page was created by <a href="https://github.com/CarlosCastillo10">Carlos Castillo</a>
+footer_text: Esta página fue creada por <a href="https://github.com/CarlosCastillo10">Carlos Castillo</a>
 
 # Sidebar settings
 show_sidebar: true                # Show the sidebar. Only set to false if your only wish to host a single page.
