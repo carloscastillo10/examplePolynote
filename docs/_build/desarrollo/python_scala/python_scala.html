@@ -22,9 +22,9 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="PYTHON---SCALA">PYTHON - SCALA<a class="anchor-link" href="#PYTHON---SCALA"> </a></h1><p>En este notebook se muestra como la plataforma soporta la combinación de varios idiomas en este caso Python - Scala y como estos pueden compartir datos entre sí.</p>
-<blockquote><p><em>Ejercicio:** El ejercicio propuesto cumple con los siguientes requisitos:</em></p>
+<blockquote><p><strong>*Ejercicio:**</strong> El ejercicio propuesto cumple con los siguientes requisitos:*</p>
 <ol>
-<li><em>Leer un archivo 'csv' con </em>scala<strong><em>.</em></strong></li>
+<li><em>Leer un archivo 'csv' con <strong><strong>scala**</strong></strong>.**</em></li>
 <li><em>Manipular dicho archivo con <strong>**python</strong></em></li>
 <li><em>Guardar los resultados con <strong><strong>scala </strong></strong>en un archivo json.</em></li>
 <li><em>Leer con pandas el archivo json generado en el paso 3.</em></li>
@@ -40,12 +40,12 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><p><br></p>
-<ul>
-<li>Se declara una clase llamada <code>Estudiante</code><strong><em> </em></strong>con su constructor sobrecargado, que permitirá inicializar los atributos <code>nombre</code>, <code>identificacion</code> y <code>notas</code> que es una lista de todas las calificaciones totales de 3 materias por cada estudiante. </li>
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li><p>Se declara una clase llamada <code>Estudiante</code><strong><em> </em></strong>con su constructor sobrecargado, que permitirá inicializar los atributos <code>nombre</code>, <code>identificacion</code> y <code>notas</code> que es una lista de todas las calificaciones totales de 3 materias por cada estudiante. </p>
+</li>
+<li><p>Se declara una clase <code>OperacionesEstudiante</code> que cuyo constructor recibe una lista de objetos de tipo <strong>*Estudiante<em>**</em></strong>. ***con la que se obtendrá el promedio por cada estudiante que se encuentre en la lista de <code>estudiantes</code>.</p>
+</li>
 </ul>
-<p><br><em> Se declara una clase <code>OperacionesEstudiante</code> que cuyo constructor recibe una lista de objetos de tipo **</em>Estudiante. ***con la que se obtendrá el promedio por cada estudiante que se encuentre en la lista de <code>estudiantes</code>.</p>
-<p><br></p>
 
 </div>
 </div>
@@ -112,8 +112,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><p><br></p>
-<ul>
+<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><ul>
 <li>En la variable <code>data</code> guardamos lo que se obtiene al momento de leer un archivo con <strong>scala, </strong>en este caso guardamos un <strong><em>string.</em></strong></li>
 </ul>
 
@@ -174,7 +173,7 @@ Richard Valladares</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
-<li>A la variable <code>data</code>que fue definida con <strong>scala </strong>la manipulamos en este bloque con <strong>python </strong>y al final generamos la variable  <strong><em>string </em></strong>con la estructura de una archivo json</li>
+<li>A la variable <code>data</code>que fue definida con <strong>scala </strong>la manipulamos en este bloque con <strong>python </strong>y al final generamos la variable  <strong><em>string </em></strong>con la estructura de una archivo json.</li>
 </ul>
 
 </div>
@@ -258,8 +257,7 @@ Richard Valladares</pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><p><br></p>
-<ul>
+<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><ul>
 <li>Guardamos con <strong>scala</strong> lo que tiene la variable <code>resultado</code> que fue generada con <strong>python</strong>  en un archivo llamado <code>resultados</code> con extensión <strong>json.</strong></li>
 </ul>
 
@@ -290,8 +288,7 @@ Richard Valladares</pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><p><br></p>
-<ul>
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
 <li>Con la librería <strong>pandas </strong>leemos el archivo generado en la celda anterior.</li>
 </ul>
 
