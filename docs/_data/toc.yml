@@ -53,7 +53,7 @@
     expand_sections: true
     sections:
       - title: Ejemplo1
-        url: /pruebaNotebook
+        url: pruebaNotebook
         not_numbered: true
       - title: Ejemplo2
         url: /features/CombinarPythonScala
