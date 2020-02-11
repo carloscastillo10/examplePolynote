@@ -1,0 +1,352 @@
+---
+redirect_from:
+  - "/desarrollo/python-scala/python-scala"
+interact_link: content/desarrollo/python_scala/python_scala.ipynb
+kernel_name: 
+has_widgets: false
+title: |-
+  PYTHON - SCALA
+prev_page:
+  url: /desarrollo//python/pruebaNotebook.html
+  title: |-
+    PYTHON
+next_page:
+  url: 
+  title: |-
+    
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+<main class="jupyter-page">
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="PYTHON---SCALA">PYTHON - SCALA<a class="anchor-link" href="#PYTHON---SCALA"> </a></h1><p>En este notebook se muestra como la plataforma soporta la combinación de varios idiomas en este caso Python - Scala y como estos pueden compartir datos entre sí.</p>
+<blockquote><p>*<em>Ejercicio:</em> El ejercicio propuesto cumple con los siguientes requisitos:*</p>
+<blockquote><p><strong>*<em>1.</em></strong> Leer un archivo 'csv' con <strong>*scala.**</strong></p>
+<p><strong>*2. **</strong>Manipular dicho archivo con <strong>*python**</strong></p>
+<p><strong>*<em>3. </em></strong>Guardar los resultados con <strong><em>scala </em></strong>en un archivo json.*</p>
+<p><strong>*<em>4.</em></strong> Leer con pandas el archivo json generado en el paso 3.*</p>
+</blockquote>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Se declara una clase llamada <code>Estudiante</code><strong><em> </em></strong>con su constructor sobrecargado, que permitirá inicializar los atributos <code>nombre</code>, <code>identificacion</code> y <code>notas</code> que es una lista de todas las calificaciones totales de 3 materias por cada estudiante. </li>
+<li>Se declara una clase <code>OperacionesEstudiante</code> que cuyo constructor recibe una lista de objetos de tipo <strong><em>Estudiante. </em></strong>con la que se obtendrá el promedio por cada estudiante que se encuentre en la lista de <code>estudiantes</code>.</li>
+</ul>
+<p><br></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Clase Estudiante</span>
+<span class="k">class</span> <span class="nc">Estudiante</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nombre</span><span class="p">,</span><span class="n">identificacion</span><span class="p">,</span><span class="n">notas</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span> <span class="o">=</span> <span class="n">nombre</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">identificacion</span> <span class="o">=</span> <span class="n">identificacion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notas</span> <span class="o">=</span> <span class="n">notas</span> <span class="c1"># Guarda una lista de calificaciones</span>
+
+<span class="c1"># Clase OperacionesEstudiante</span>
+<span class="k">class</span> <span class="nc">OperacionesEstudiante</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="c1"># Recibe como parametros una lista de objetos de tipo estudiante</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">listaEstudiantes</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estudiantes</span> <span class="o">=</span> <span class="n">listaEstudiantes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">promedios</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Metodo que permite obtener el promedio de cada estudiante</span>
+    <span class="k">def</span> <span class="nf">obtener_promedio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">estudiante</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">estudiantes</span><span class="p">:</span>
+            <span class="n">suma</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">estudiante</span><span class="o">.</span><span class="n">notas</span><span class="p">:</span>
+                <span class="n">suma</span> <span class="o">+=</span> <span class="n">y</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">promedios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">suma</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">estudiante</span><span class="o">.</span><span class="n">notas</span><span class="p">))</span>
+    
+    <span class="c1"># Metodo que genera una cadena en con la estuctura de un json</span>
+    <span class="k">def</span> <span class="nf">escribir_resultados</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">resultadoStr</span> <span class="o">=</span> <span class="s1">&#39;{</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="k">for</span> <span class="n">estudiante</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">estudiantes</span><span class="p">:</span>
+            <span class="c1"># Formamos la cadena en un formato json</span>
+            <span class="n">resultadoStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&quot;Estudiante</span><span class="si">%d</span><span class="s1">&quot;:{&quot;Nombre&quot;: &quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&quot;Identificacion&quot;: &quot;</span><span class="si">%s</span><span class="s1">&quot;, &quot;Notas&quot;: &quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; &quot;Promedio&quot;: &quot;</span><span class="si">%s</span><span class="s1">&quot;},</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">resultadoStr</span><span class="p">,</span><span class="n">cont</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">estudiante</span><span class="o">.</span><span class="n">nombre</span><span class="p">,</span><span class="n">estudiante</span><span class="o">.</span><span class="n">identificacion</span><span class="p">,</span>
+            <span class="n">estudiante</span><span class="o">.</span><span class="n">notas</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">promedios</span><span class="p">[</span><span class="n">cont</span><span class="p">])</span>
+            <span class="n">cont</span><span class="o">+=</span><span class="mi">1</span>
+
+        <span class="n">resultadoStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">}&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">resultadoStr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resultadoStr</span>
+           
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><ul>
+<li>En la variable <code>data</code> guardamos lo que se obtiene al momento de leer un archivo con <strong>scala, </strong>en este caso guardamos un <strong><em>string.</em></strong></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">/*</span>
+<span class="n">La</span> <span class="n">variable</span> <span class="s1">&#39;data&#39;</span> <span class="n">es</span> <span class="n">interpretada</span> <span class="n">por</span> <span class="n">el</span> <span class="n">lenguaje</span> <span class="n">de</span> 
+<span class="n">programacion</span> <span class="s1">&#39;Python&#39;</span> <span class="n">ya</span> <span class="n">que</span> <span class="n">su</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">dato</span> <span class="n">es</span> <span class="s1">&#39;str&#39;</span>
+<span class="o">*/</span>
+
+<span class="n">val</span> <span class="n">data</span> <span class="o">=</span> <span class="n">scala</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="s2">&quot;data/calificaciones.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mkString</span>
+<span class="n">data</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>nombre|identificacion|nota1|nota2|nota3
+Carlos Castillo|1104999535|38|38|40
+Luis Erazo|1102721238|39|39|40
+Luis Diaz|1105678954|40|37|34
+Jose Castillo|1102134560|40|39|38
+Karen Giron|1102345768|39|31|35
+Thalia Mijas|1105023386|39|38|36
+Richard Valladares</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>A la variable <code>data</code>que fue definida con <strong>scala </strong>la manipulamos en este bloque con <strong>python </strong>y al final generamos la variable  <strong><em>string </em></strong>con la estructura de una archivo json</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># &#39;data&#39; esta definido en el bloque de &#39;scala&#39;</span>
+<span class="n">auxData</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="n">auxData</span> <span class="o">=</span> <span class="n">auxData</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">auxData</span> <span class="o">=</span> <span class="n">auxData</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">listaData</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">auxData</span><span class="p">:</span>
+    <span class="n">listaData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fila</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">listaData</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">columna</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">))</span>
+
+
+<span class="n">listaEstudiantes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">listaNotas</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="mi">4</span><span class="p">])]</span>
+    <span class="n">objEstudiante</span> <span class="o">=</span> <span class="n">Estudiante</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">fila</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">listaNotas</span><span class="p">)</span>
+    <span class="c1"># Agregamos los objetos de tipo estudiante a la lista</span>
+    <span class="n">listaEstudiantes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">objEstudiante</span><span class="p">)</span>
+
+<span class="c1"># Creamos el objeto de tipo &#39;OperacionesEstudiante&#39;</span>
+<span class="n">operacion</span> <span class="o">=</span> <span class="n">OperacionesEstudiante</span><span class="p">(</span><span class="n">listaEstudiantes</span><span class="p">)</span>
+
+<span class="c1"># Guardamos en &#39;promedios&#39; lo que devuelve el metodo.</span>
+<span class="n">promedios</span> <span class="o">=</span> <span class="n">operacion</span><span class="o">.</span><span class="n">obtener_promedio</span><span class="p">()</span>
+
+<span class="c1"># Variable que es interpretada por el lenguaje de programacion &#39;Scala&#39;</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">operacion</span><span class="o">.</span><span class="n">escribir_resultados</span><span class="p">()</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{
+&#34;Estudiante1&#34;:{&#34;Nombre&#34;: &#34;Carlos Castillo&#34;,&#34;Identificacion&#34;: &#34;1104999535&#34;, &#34;Notas&#34;: &#34;[38, 38, 40]&#34;, &#34;Promedio&#34;: &#34;38.666666666666664&#34;},
+&#34;Estudiante2&#34;:{&#34;Nombre&#34;: &#34;Luis Erazo&#34;,&#34;Identificacion&#34;: &#34;1102721238&#34;, &#34;Notas&#34;: &#34;[39, 39, 40]&#34;, &#34;Promedio&#34;: &#34;39.333333333333336&#34;},
+&#34;Estudiante3&#34;:{&#34;Nombre&#34;: &#34;Luis Diaz&#34;,&#34;Identificacion&#34;: &#34;1105678954&#34;, &#34;Notas&#34;: &#34;[40, 37, 34]&#34;, &#34;Promedio&#34;: &#34;37.0&#34;},
+&#34;Estudiante4&#34;:{&#34;Nombre&#34;: &#34;Jose Castillo&#34;,&#34;Identificacion&#34;: &#34;1102134560&#34;, &#34;Notas&#34;: &#34;[40, 39, 38]&#34;, &#34;Promedio&#34;: &#34;39.0&#34;},
+&#34;Estudiante5&#34;:{&#34;Nombre&#34;: &#34;Karen Giron&#34;,&#34;Identificacion&#34;: &#34;1102345768&#34;, &#34;Notas&#34;: &#34;[39, 31, 35]&#34;, &#34;Promedio&#34;: &#34;35.0&#34;},
+&#34;Estudiante6&#34;:{&#34;Nombre&#34;: &#34;Thalia Mijas&#34;,&#34;Identificacion&#34;: &#34;1105023386&#34;, &#34;Notas&#34;: &#34;[39, 38, 36]&#34;, &#34;Promedio&#34;: &#34;37.666666666666664&#34;},
+&#34;Estudiante7&#34;:{&#34;Nombre&#34;: &#34;Richard Valladares&#34;,&#34;Identificacion&#34;: &#34;1102341342&#34;, &#34;Notas&#34;: &#34;[31, 30, 35]&#34;, &#34;Promedio&#34;: &#34;32.0&#34;},
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><ul>
+<li>Guardamos con <strong>scala</strong> lo que tiene la variable <code>resultado</code> que fue generada con <strong>python</strong>  en un archivo llamado <code>resultados</code> con extensión <strong>json.</strong></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Guardamos</span> <span class="n">el</span> <span class="n">archivo</span> <span class="n">con</span> <span class="n">extension</span> <span class="o">.</span><span class="n">json</span>
+<span class="n">reflect</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;data/resultados.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">writeAll</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Con la librería <strong>pandas </strong>leemos el archivo generado en la celda anterior.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;data/resultados.json&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>                       Estudiante1  ...         Estudiante7
+Identificacion          1104999535  ...          1102341342
+Nombre             Carlos Castillo  ...  Richard Valladares
+Notas                 [38, 38, 40]  ...        [31, 30, 35]
+Promedio        38.666666666666664  ...                32.0
+
+[4 rows x 7 columns]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://drive.google.com/uc?id=1dCzFDWsShAcd9Bsf47bfOKVm-cXdnfLz&amp;export=download&amp;authuser=0">Descargar Ejercicio</a></p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+</main>
