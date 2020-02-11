@@ -27,20 +27,16 @@
   not_numbered: true
 
 # External link
-- title: GitHub Repository
+- title: Repositorio GitHub
   url: https://github.com/CarlosCastillo10/examplePolynote
   external: true
   not_numbered: true
-
-# Adds a searchbar link
-- title: Search
-  search: true
 
 # Divider for meta-pages and content page
 - divider: true
 
 # Add a header and sample content section
-- header: Demo textbook
+- header: Documentación
 
 # A chapter w/ a collection of sections beneath it
 - title: Instalación y desarrollo
@@ -57,9 +53,9 @@
     expand_sections: true
     sections:
       - title: Ejemplo1
-        url: /features/Python_Scala_Vega
+        url: Python_Scala_Vega
         not_numbered: true
       - title: Ejemplo2
-        url: /features/CombinarPythonScala
+        url: CombinarPythonScala
         not_numbered: true
 
