@@ -64,9 +64,9 @@
       # url: 
       not_numbered: true
     - title: PYTHON - SCALA
-      # url: 
+      url: /desarrollo/python_scala/Python_Scala
       not_numbered: true
     - title: PYTHPON - SCALA - VEGA
-      # url: 
+      #url: /desarrollo/python_scala_vega/Python_Scala_Vega
       not_numbered: true  
 
