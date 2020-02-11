@@ -53,9 +53,9 @@
     expand_sections: true
     sections:
       - title: Ejemplo1
-        url: Python_Scala_Vega
+        url: /features/Python_Scala_Vega
         not_numbered: true
       - title: Ejemplo2
-        url: CombinarPythonScala
+        url: /features/CombinarPythonScala
         not_numbered: true
 
