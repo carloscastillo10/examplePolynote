@@ -19,74 +19,55 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Building-and-publishing-your-book">Building and publishing your book<a class="anchor-link" href="#Building-and-publishing-your-book"> </a></h1><p>Once you've added content and configured your book, it's time to
-build the HTML for each <strong>page</strong> of your book. We'll use the
-<code>jupyter-book build</code> command-line tool for this. In the <em>next step</em>,
-we'll stitch these HTML pages into a book.</p>
-<h2 id="Prerequisites">Prerequisites<a class="anchor-link" href="#Prerequisites"> </a></h2><p>In order to build the HTML for each page, you should have followed the steps
-in <a href="02_create.html">creating your Jupyter Book structure</a>. You should have
-a Jupyter Book structure in a local folder on your computer, a collection
-of notebook/markdown files in your <code>content/</code> folder, a <code>_data/toc.yml</code> file
-that defines the structure of your book, and any configuration you'd like
-in the <code>config.yml</code> file.</p>
-<h2 id="Build-each-page's-HTML">Build each page's HTML<a class="anchor-link" href="#Build-each-page's-HTML"> </a></h2><p>Now that your book's content is in the <code>content/</code> folder and you've
-defined your book's structure in <code>_data/toc.yml</code>, you can build
-the HTML for each page of your book.</p>
-<p>Do so by running the following command:</p>
-
-<pre><code>jupyter-book build mybookname/</code></pre>
-<p>This will:</p>
+<h1 id="INSTALACI&#211;N">INSTALACI&#211;N<a class="anchor-link" href="#INSTALACI&#211;N"> </a></h1><p style="text-align: justify;">Polynote actualmente solo se prueba en Linux y MacOS, utilizando el navegador Chrome como cliente</p><h3 id="MAC:">MAC:<a class="anchor-link" href="#MAC:"> </a></h3><ul>
+<li>Se necesita el manejador de paquetes <a href="https://brew.sh">Homebrew</a>.</li>
+<li>Puede instalar Spark localmente con <code class="language-plaintext highlighter-rouge">brew install apache-spark</code></li>
+</ul>
+<h3 id="LINUX:">LINUX:<a class="anchor-link" href="#LINUX:"> </a></h3><ul>
+<li><p>Desactive Spark donde quiera y configure su entorno para que <strong>SPARK_HOME</strong> apunte a la ubicación de Spark.</p>
+</li>
+<li><p>Luego agregue <code>$PARK_HOME/bin/</code> a su PATH.</p>
+</li>
+<li><p>También necesitara un <strong>JDK instalado</strong> y <strong>JAVA_HOME</strong> configurado correctamente.</p>
+</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✨ Comience por un <code>sudo apt-get update</code> para actualizar todos los repositorios.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✨ Instale Java (Esto instala Java11 por defecto) <code>sudo apt-get install default-jdk</code>.</p>
 <ul>
-<li>Use the links specified in the <code>_data/toc.yml</code> file (pointing to files in <code>/content/</code>) and
-do the following:<ul>
-<li>Run <code>nbconvert</code> to turn the content files (e.g., <code>.ipynb</code>, <code>.md</code>, etc) files into HTML</li>
-<li>Replace relative image file paths so that they work on your new built book</li>
-<li>Place all these generated files in the <code>mybookname/_build/</code> directory.</li>
-</ul>
+<li><p><a href="https://github.com/polynote/polynote/releases/download/0.2.13/polynote-dist-2.12.tar.gz">Descargue polynote</a> y luego <code>tar -zxvpf polynote-dist.tar.gz</code>.</p>
+</li>
+<li><p><a href="https://www-eu.apache.org/dist/spark/spark-3.0.0-preview/spark-3.0.0-preview-bin-hadoop2.7.tgz">Descargue spark</a>, y a continuación <code>tar -zxvf spark-2.4.4-bin-hadoop2.7.tgz</code>.</p>
+</li>
+<li><p>Establezca <code>JAVA_HOME: export JAVA_HOME=/usr/lib/jvm/default-java/</code></p>
+</li>
+<li><p>Establezca <code>SPARK_HOME: export SPARK_HOME=`pwd`/spark-2.4.4-bin-hadoop2.7/</code></p>
+</li>
+<li><p>Establezca PATH: <code>export PATH="PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin"</code></p>
+</li>
+<li><p>Compruebe si spark está configurado correctamente, al ejecutar <code>spark-submit</code>, debería ver información de uso.</p>
 </li>
 </ul>
-<p>After this step is finished, you should have a collection of HTML files in your
-<code>_build/</code> folder.</p>
-<h3 id="Page-HTML-caching">Page HTML caching<a class="anchor-link" href="#Page-HTML-caching"> </a></h3><p>By default, Jupyter Book will only build the HTML for pages that have
-been updated since the last time you built the book. This helps reduce the
-amount of unnecessary time needed to build your book. If you'd like to
-force Jupyter Book to re-build a particular page, you can either edit the
-corresponding file in the <code>content/</code> folder, or delete that page's HTML
-in the <code>_build/</code> folder.</p>
-<h2 id="Create-an-online-repository-for-your-book">Create an <em>online</em> repository for your book<a class="anchor-link" href="#Create-an-online-repository-for-your-book"> </a></h2><p>You've created your book on your own computer, but you haven't yet added it
-online. This section covers the steps to create your own GitHub repository,
-and to add your book's content to it. In this case, we'll use GitHub-Pages
-to build the HTML for your book. However, you can also build the book's HTML
-manually. Both will be covered in <a href="04_publish.html">building and publishing your book</a>.</p>
-<ol>
-<li><p>First, log-in to GitHub, then go to the "create a new repository" page:</p>
-<p><a href="https://github.com/new">https://github.com/new</a></p>
-</li>
-<li><p>Next, add a name and description for your book. You can choose whatever
-initialization you'd like.</p>
-</li>
-<li><p>Now, clone the empty repository to your computer:</p>
-<div class="highlight"><pre><span></span>git clone https://github.com/&lt;my-org&gt;/&lt;my-book-name&gt;
+<h3 id="Configuraci&#243;n">Configuraci&#243;n<a class="anchor-link" href="#Configuraci&#243;n"> </a></h3><ul>
+<li><p style="text-align: justify;">Compatibilidad con Python: para ejecutar el código de Python, necesitará tener instalado una versión de <strong>Python 3</strong> y <strong>pip</strong> o <strong>pip3</strong>.</p></li>
+</ul>
+<div class="highlight"><pre><span></span>sudo apt-get install python3.6
 </pre></div>
-</li>
-<li><p>Copy all of your book files and folders (what was created when you ran <code>jupyter-book create mybook</code>)
-into the new repository. For example, if you created your book locally with <code>jupyter-book create mylocalbook</code>
-and your online repository is called <code>myonlinebook</code>, the command would be:</p>
-<div class="highlight"><pre><span></span>cp -r mylocalbook/* myonlinebook/
+<div class="highlight"><pre><span></span>sudo apt install python-pip
 </pre></div>
-<p>This will copy over the local book files into the online book folder.</p>
-</li>
-<li><p>Commit the new files to the repository in <code>myonlinebook/</code>:</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> myonlinebook
-git add ./*
-git commit -m <span class="s2">&quot;adding my first book!&quot;</span>
-git push
+<ul>
+<li><p style="text-align: justify;">También tendrá que instalar algunas dependencias de Python como <strong>jep,jedi y virtualenv</strong></p></li>
+</ul>
+<div class="highlight"><pre><span></span>pip install jep jedi pyspark virtualenv
 </pre></div>
-</li>
-</ol>
-<p>That's it!</p>
-<h2 id="Next-step:-build-your-book">Next step: build your book<a class="anchor-link" href="#Next-step:-build-your-book"> </a></h2><p>Now that you've created the HTML for each page of your book, it's time
-to stitch them together into a book. That's covered in the next section.</p>
+<ul>
+<li><p style="text-align: justify;">Además, es probable que necesite instalar <strong>pandas y numpy</strong></p></li>
+</ul>
+<div class="highlight"><pre><span></span>pip install pandas
+</pre></div>
+<div class="highlight"><pre><span></span>pip install numpy
+</pre></div>
+<h3 id="Ejecutar:">Ejecutar:<a class="anchor-link" href="#Ejecutar:"> </a></h3><div class="highlight"><pre><span></span>./polynote
+</pre></div>
 
 </div>
 </div>
