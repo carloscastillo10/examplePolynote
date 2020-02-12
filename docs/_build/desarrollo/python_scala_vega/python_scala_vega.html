@@ -1,0 +1,657 @@
+---
+redirect_from:
+  - "/desarrollo/python-scala-vega/python-scala-vega"
+interact_link: content/desarrollo/python_scala_vega/python_scala_vega.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  PYTHPON - SCALA - VEGA
+prev_page:
+  url: /desarrollo/python_scala/python_scala.html
+  title: |-
+    PYTHON - SCALA
+next_page:
+  url: 
+  title: |-
+    
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+<main class="jupyter-page">
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="PYTHON---SCALA---VEGA-SPEC">PYTHON - SCALA - VEGA SPEC<a class="anchor-link" href="#PYTHON---SCALA---VEGA-SPEC"> </a></h1><p>En este notebook se muestra como podemos mezclar 3 idiomas, estableceremos una relación <strong>PYTHON - SCALA - VEGA SPEC</strong>.</p>
+<blockquote><p><strong><em>Ejercicio:</em></strong> Combinar Python,Scala y Vega Spec.</p>
+<blockquote><p><strong><em>Requisitos:</em></strong></p>
+<ul>
+<li><strong>1.</strong> Leer un archivo 'csv' que contiene los datos de todos los jugadores que participaron en el ultimo mundial.</li>
+<li><strong>2.</strong> Guardar los datos de cada jugador en MongoDB.</li>
+<li><strong>3.</strong> Generar 3 selecciones de manera aleatoria y determinar la selección que convirtió mas goles.</li>
+<li><strong>4.</strong> Graficar las 3 selecciones generadas, donde se detalle el nombre y el numero de goles convertidos de cada selección.</li>
+</ul>
+</blockquote>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Definimos una clase llamada <code>Player</code> con su constructor por defecto que se encarga de inicializar todos los atributos definidos para un <code>Player</code>.</li>
+<li>Además sobre escribimos el metodo <code>__str__</code>propio de <strong><em>python</em></strong> para darle el formato que deseemos a la manera de como se presenta un objeto, en este caso de tipo <strong>Player</strong>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Clase player</span>
+<span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+	<span class="c1"># Contructor sobre cargado</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numFifa</span><span class="p">,</span><span class="n">displayName</span><span class="p">,</span><span class="n">country</span><span class="p">,</span><span class="n">lastName</span><span class="p">,</span>
+		<span class="n">firstName</span><span class="p">,</span><span class="n">shirtName</span><span class="p">,</span><span class="n">dateBirth</span><span class="p">,</span><span class="n">position</span><span class="p">,</span><span class="n">club</span><span class="p">,</span><span class="n">height</span><span class="p">,</span>
+		<span class="n">caps</span><span class="p">,</span><span class="n">goals</span><span class="p">):</span>
+		
+		<span class="bp">self</span><span class="o">.</span><span class="n">numFifa</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">numFifa</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">displayName</span> <span class="o">=</span> <span class="n">displayName</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">lastName</span> <span class="o">=</span> <span class="n">lastName</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">firstName</span> <span class="o">=</span> <span class="n">firstName</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">shirtName</span> <span class="o">=</span> <span class="n">shirtName</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dateBirth</span> <span class="o">=</span> <span class="n">dateBirth</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">club</span> <span class="o">=</span> <span class="n">club</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">caps</span> <span class="o">=</span> <span class="n">caps</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">goals</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">goals</span><span class="p">)</span>
+	
+	<span class="c1"># Sobre escribimos el metodo __str__()</span>
+	<span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s2">&quot;numFifa: </span><span class="si">%d</span><span class="s2"> - displayName: </span><span class="si">%s</span><span class="s2"> - country: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> 
+		<span class="s2">&quot;lastName: </span><span class="si">%s</span><span class="s2"> firstName: </span><span class="si">%s</span><span class="s2"> - shirtName: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+		<span class="s2">&quot; - dateBirth: </span><span class="si">%s</span><span class="s2"> - position: </span><span class="si">%s</span><span class="s2"> - club: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+		<span class="s2">&quot; - height: </span><span class="si">%f</span><span class="s2"> - caps: </span><span class="si">%s</span><span class="s2"> - goals: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numFifa</span><span class="p">,</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">displayName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">country</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lastName</span><span class="p">,</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">firstName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">shirtName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dateBirth</span><span class="p">,</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">club</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">caps</span><span class="p">,</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">goals</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><ul>
+<li>En la variable <code>dataStr</code> guardamos lo que se obtiene al momento de leer un archivo con <strong>scala</strong>,en este caso guardamos un <strong><em>string</em></strong> por lo tanto puede ser interpretada y manipulada con <strong><em>python</em></strong>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">/*</span>
+    <span class="n">La</span> <span class="n">variable</span> <span class="s1">&#39;dataStr&#39;</span> <span class="n">es</span> <span class="n">definida</span> <span class="n">con</span> <span class="s1">&#39;scala&#39;</span> <span class="n">cuyo</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">dato</span>
+    <span class="n">es</span> <span class="s1">&#39;string&#39;</span> <span class="n">y</span> <span class="n">por</span> <span class="n">lo</span> <span class="n">tanto</span> <span class="n">puede</span> <span class="n">ser</span> <span class="n">interpretado</span> <span class="n">con</span> <span class="s1">&#39;python&#39;</span><span class="o">.</span>
+<span class="o">*/</span>
+<span class="n">val</span> <span class="n">dataStr</span> <span class="o">=</span> <span class="n">scala</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="s2">&quot;data/mundial.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mkString</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Con la ayuda de la librería <strong><em>pymongo</em></strong> realizamos una conexión con <strong>MongoDB</strong> y obtenemos una colección para trabajar con ella. </li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+
+<span class="c1"># Conexión al Server de MongoDB Pasandole el host y el puerto</span>
+<span class="n">mongoClient</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span><span class="mi">27017</span><span class="p">)</span>
+
+<span class="c1"># Conexión a la base de datos</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">mongoClient</span><span class="o">.</span><span class="n">Player</span>
+
+<span class="c1"># Obtenemos una coleccion para trabajar con ella</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Players</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Establecemos un método llamado <code>insertPlayer()</code> que recibe todos los datos de un jugador leídos desde el 'csv' donde creamos un diccionario llamado <code>dictPlayer</code> e insertamos este diccionario a la base de datos.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Metodo que permite insertar cada jugador en la base de datos</span>
+<span class="k">def</span> <span class="nf">insertPlayer</span><span class="p">(</span><span class="n">numFifa</span><span class="p">,</span> <span class="n">displayName</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">lastName</span><span class="p">,</span> <span class="n">firstName</span><span class="p">,</span>
+    <span class="n">shirtName</span><span class="p">,</span> <span class="n">dateBirth</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">club</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">caps</span><span class="p">,</span> <span class="n">goals</span><span class="p">):</span>
+
+    <span class="c1"># diccionario</span>
+    <span class="n">dictPlayer</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;numFifa&#39;</span><span class="p">:</span> <span class="n">numFifa</span><span class="p">,</span><span class="s1">&#39;displayName&#39;</span><span class="p">:</span><span class="n">displayName</span><span class="p">,</span>
+        <span class="s1">&#39;country&#39;</span><span class="p">:</span><span class="n">country</span><span class="p">,</span><span class="s1">&#39;lastName&#39;</span><span class="p">:</span><span class="n">lastName</span><span class="p">,</span><span class="s1">&#39;firstName&#39;</span><span class="p">:</span><span class="n">firstName</span><span class="p">,</span>
+        <span class="s1">&#39;shirtName&#39;</span><span class="p">:</span><span class="n">shirtName</span><span class="p">,</span><span class="s1">&#39;dateBirth&#39;</span><span class="p">:</span><span class="n">dateBirth</span><span class="p">,</span>
+        <span class="s1">&#39;position&#39;</span><span class="p">:</span><span class="n">position</span><span class="p">,</span><span class="s1">&#39;club&#39;</span><span class="p">:</span><span class="n">club</span><span class="p">,</span><span class="s1">&#39;height&#39;</span><span class="p">:</span><span class="n">height</span><span class="p">,</span><span class="s1">&#39;caps&#39;</span><span class="p">:</span><span class="n">caps</span><span class="p">,</span>
+        <span class="s1">&#39;goals&#39;</span><span class="p">:</span><span class="n">goals</span>
+        <span class="p">}</span>
+
+    <span class="c1"># Insertamos la coleccion en mongoDB    </span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">dictPlayer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>A la variable <code>dataStr</code> que fue definida con <strong>scala</strong> la manipulamos para generar una lista de listas que contienen los datos de cada jugador leído desde el 'csv'.</li>
+<li>Por cada fila que se encuentra en <code>data</code>, es decir cada fila contiene los datos de un jugador, llamamos al método <code>insertPlayer()</code> para poder insertar cada registro de un jugador en la base de datos.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Separamos por salto de linea (\n) cada registro</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Usando comprensión de listas, separamos cada registro por el</span>
+<span class="c1"># caracter &#39;|&#39;.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="c1"># Eliminamos los encabezados</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+     <span class="c1"># Llamamos al metodo &#39;insertPlayer()&#39;</span>
+     <span class="n">insertPlayer</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+          <span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Definimos un método llamado <code>getGoalsBySelecction</code> que recibe dos listas, una de jugadores y otra de los países que participaron en el mundial. Este método se encarga de generar y devolver una <strong>lista de tuplas</strong> que contiene el <strong><em>nombre del país</em></strong> y el <strong><em>numero de goles</em></strong> que ha marcado.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Metodo que permite calcular el numero de goles de cada selección</span>
+<span class="k">def</span> <span class="nf">getGoalsBySelecction</span><span class="p">(</span><span class="n">players</span><span class="p">,</span><span class="n">countries</span><span class="p">):</span>
+    <span class="n">listGoals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+        <span class="n">goals</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="n">country</span><span class="p">):</span>
+                <span class="n">goals</span> <span class="o">+=</span> <span class="n">player</span><span class="o">.</span><span class="n">goals</span>
+        <span class="c1"># Agregamos a lista una tupla.</span>
+        <span class="n">listGoals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">country</span><span class="p">,</span><span class="n">goals</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">listGoals</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Obtenemos todos los jugadores registrados desde mongoDB y creamos los objetos de tipo <code>Player</code>.</li>
+<li> Guardamos en <code>countries</code> una lista ordenada por orden albafético de los países únicos que participaron en mundial.</li>
+<li>En <code>countriesGoals</code> guardamos la lista de tuplas que devuelve el metodo <code>getGoalsBySelecction</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Obtenemos la colección de mongoDB</span>
+<span class="n">collPlayers</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span>
+<span class="n">players</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">collPlayers</span><span class="p">:</span>
+    <span class="c1"># Creamos los objetos de tiplo &#39;Player&#39;</span>
+    <span class="n">objPlayer</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;numFifa&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;displayName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;lastName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;firstName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;shirtName&#39;</span><span class="p">],</span>
+    <span class="n">x</span><span class="p">[</span><span class="s1">&#39;dateBirth&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;club&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;goals&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Agregamos a lista el objeto de tipo &#39;Player&#39;</span>
+    <span class="n">players</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">objPlayer</span><span class="p">)</span>  
+
+<span class="c1"># Obtenemos una lista ordenada de los paises sin repetirse</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">player</span><span class="o">.</span><span class="n">country</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">]))</span>
+
+<span class="c1"># Obtenemos el nombre del pais y el numero de goles marcados.</span>
+<span class="n">countriesGoals</span> <span class="o">=</span> <span class="n">getGoalsBySelecction</span><span class="p">(</span><span class="n">players</span><span class="p">,</span><span class="n">countries</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Con la ayuda de la librería <strong><em>random.sample</em></strong> obtenemos de manera aleatoria 3 países con el numero de goles que se encuentran almacenados en <code>countriesGoals.</code></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">sample</span>
+<span class="c1"># Obtenemos de manera aleatoria 3 paises de &#39;countriesGoals&#39;</span>
+<span class="n">countriesSelecteds</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">countriesGoals</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">countriesSelecteds</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(&#39;IR Iran&#39;, 222), (&#39;Portugal&#39;, 284), (&#39;Poland&#39;, 252)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-PYTHON">C&#211;DIGO PYTHON<a class="anchor-link" href="#C&#211;DIGO-PYTHON"> </a></h4><ul>
+<li>Las variables definidas en esta celda serán manipularlas con el lenguaje scala para generar <strong>tuplas</strong> propias de scala.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Variables que guardan los nombres de los países que se encuentran</span>
+<span class="c1"># en &#39;countriesSelecteds&#39;</span>
+<span class="n">countryName1</span> <span class="o">=</span> <span class="n">countriesSelecteds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">countryName2</span> <span class="o">=</span> <span class="n">countriesSelecteds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">countryName3</span> <span class="o">=</span> <span class="n">countriesSelecteds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Variables que guardan los goles de los países que se encuentran</span>
+<span class="c1"># en &#39;countriesSelecteds&#39;</span>
+<span class="n">countryGoal1</span> <span class="o">=</span> <span class="n">countriesSelecteds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">countryGoal2</span> <span class="o">=</span> <span class="n">countriesSelecteds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">countryGoal3</span> <span class="o">=</span> <span class="n">countriesSelecteds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Obtenemos el el numero de goles mas alto de las 3 selecciones</span>
+<span class="n">countryMaxGoals</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">goal</span> <span class="k">for</span> <span class="p">(</span><span class="n">country</span><span class="p">,</span><span class="n">goal</span><span class="p">)</span> <span class="ow">in</span> <span class="n">countriesSelecteds</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-SCALA">C&#211;DIGO SCALA<a class="anchor-link" href="#C&#211;DIGO-SCALA"> </a></h4><ul>
+<li>Generamos tuplas en <strong>scala</strong> a partir de las variables definidas en la celda anterior con <strong>python.</strong></li>
+<li>Definimos un método llamado <code>getMaximunGoals</code> que se encargará de encontrar de los 3 países, el país que ha marcado mas goles. </li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Tuplas</span> <span class="n">que</span> <span class="n">contienen</span> <span class="n">el</span> <span class="n">nombre</span> <span class="n">y</span> <span class="n">el</span> <span class="n">numero</span> <span class="n">de</span> <span class="n">goles</span> <span class="n">de</span> <span class="n">cada</span> <span class="n">país</span><span class="o">.</span>
+<span class="n">val</span> <span class="n">country1</span> <span class="o">=</span> <span class="p">(</span><span class="n">countryName1</span><span class="p">,</span><span class="n">countryGoal1</span><span class="o">.</span><span class="n">toInt</span><span class="p">)</span>
+<span class="n">val</span> <span class="n">country2</span> <span class="o">=</span> <span class="p">(</span><span class="n">countryName2</span><span class="p">,</span><span class="n">countryGoal2</span><span class="o">.</span><span class="n">toInt</span><span class="p">)</span>
+<span class="n">val</span> <span class="n">country3</span> <span class="o">=</span> <span class="p">(</span><span class="n">countryName3</span><span class="p">,</span><span class="n">countryGoal3</span><span class="o">.</span><span class="n">toInt</span><span class="p">)</span>
+
+<span class="o">//</span> <span class="n">Llamamos</span> <span class="n">al</span> <span class="n">metodo</span> <span class="n">para</span> <span class="n">obtener</span> <span class="n">el</span> <span class="n">país</span> <span class="n">que</span> <span class="n">marcó</span> <span class="n">mas</span> <span class="n">goles</span>
+<span class="n">getMaximunGoals</span><span class="p">()</span>
+
+<span class="o">/*</span> 
+    <span class="n">Metodo</span> <span class="n">que</span> <span class="n">permite</span> <span class="n">obtener</span> <span class="n">de</span> <span class="n">los</span> <span class="mi">3</span> <span class="n">países</span> <span class="n">seleccionados</span><span class="p">,</span> 
+    <span class="n">el</span> <span class="n">país</span> <span class="n">que</span> <span class="n">convirtió</span> <span class="n">el</span> <span class="n">mayor</span> <span class="n">número</span> <span class="n">de</span> <span class="n">goles</span><span class="o">.</span>
+<span class="o">*/</span>
+
+<span class="k">def</span> <span class="nf">getMaximunGoals</span><span class="p">(){</span>    
+    <span class="k">if</span><span class="p">(</span><span class="n">country2</span><span class="o">.</span><span class="n">_2</span> <span class="o">&gt;</span> <span class="n">country1</span><span class="o">.</span><span class="n">_2</span><span class="p">)</span> <span class="n">println</span><span class="p">(</span><span class="n">country2</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">country3</span><span class="o">.</span><span class="n">_2</span> <span class="o">&gt;</span> <span class="n">country1</span><span class="o">.</span><span class="n">_2</span><span class="p">)</span> <span class="n">println</span><span class="p">(</span><span class="n">country3</span><span class="p">)</span>
+    <span class="k">else</span> <span class="n">println</span><span class="p">(</span><span class="n">country1</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(Germany,318)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="C&#211;DIGO-VEGA-SPEC">C&#211;DIGO VEGA SPEC<a class="anchor-link" href="#C&#211;DIGO-VEGA-SPEC"> </a></h4><ul>
+<li>Definimos un gráfico de barras que mostrará el nombre de las 3 selecciones y el numero de goles que ha marcado cada país.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="o">{</span>
+  <span class="s2">&quot;</span><span class="nv">$schema</span><span class="s2">&quot;</span>: <span class="s2">&quot;https://vega.github.io/schema/vega/v5.json&quot;</span>,
+  <span class="s2">&quot;width&quot;</span>: <span class="m">400</span>,
+  <span class="s2">&quot;height&quot;</span>: <span class="m">300</span>,
+  <span class="s2">&quot;padding&quot;</span>: <span class="m">5</span>,
+  <span class="s2">&quot;autosize&quot;</span>:<span class="s2">&quot;pad&quot;</span>,
+  <span class="s2">&quot;data&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;data_countries&quot;</span>,
+      <span class="s2">&quot;values&quot;</span>: <span class="o">[</span>
+        <span class="o">{</span><span class="s2">&quot;category&quot;</span>: country1._1, <span class="s2">&quot;position&quot;</span>:0,<span class="s2">&quot;value&quot;</span>: country1._2<span class="o">}</span>,
+        <span class="o">{</span><span class="s2">&quot;category&quot;</span>: country2._1,<span class="s2">&quot;position&quot;</span>:1, <span class="s2">&quot;value&quot;</span>: country2._2<span class="o">}</span>,
+        <span class="o">{</span><span class="s2">&quot;category&quot;</span>: country3._1, <span class="s2">&quot;position&quot;</span>:2,<span class="s2">&quot;value&quot;</span>: country3._2<span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+
+  <span class="s2">&quot;scales&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;yscale&quot;</span>,
+      <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;band&quot;</span>,
+      <span class="s2">&quot;domain&quot;</span>: <span class="o">{</span><span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;data_countries&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;category&quot;</span><span class="o">}</span>,
+      <span class="s2">&quot;range&quot;</span>: <span class="s2">&quot;height&quot;</span>,
+      <span class="s2">&quot;padding&quot;</span>: <span class="m">0</span>.2
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;xscale&quot;</span>,
+      <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;linear&quot;</span>,
+      <span class="s2">&quot;domain&quot;</span>: <span class="o">{</span><span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;data_countries&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;value&quot;</span><span class="o">}</span>,
+      <span class="s2">&quot;range&quot;</span>: <span class="s2">&quot;width&quot;</span>,
+      <span class="s2">&quot;round&quot;</span>: true,
+      <span class="s2">&quot;zero&quot;</span>: true,
+      <span class="s2">&quot;nice&quot;</span>: <span class="nb">true</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;color&quot;</span>,
+      <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;ordinal&quot;</span>,
+      <span class="s2">&quot;domain&quot;</span>: <span class="o">{</span><span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;data_countries&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;position&quot;</span><span class="o">}</span>,
+      <span class="s2">&quot;range&quot;</span>: <span class="o">{</span><span class="s2">&quot;scheme&quot;</span>: <span class="s2">&quot;category20&quot;</span><span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+
+  <span class="s2">&quot;axes&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span><span class="s2">&quot;orient&quot;</span>: <span class="s2">&quot;left&quot;</span>, <span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;yscale&quot;</span>,<span class="s2">&quot;tickSize&quot;</span>: <span class="m">0</span>, <span class="s2">&quot;labelPadding&quot;</span>: <span class="m">4</span>, <span class="s2">&quot;zindex&quot;</span>: <span class="m">1</span><span class="o">}</span>,
+    <span class="o">{</span><span class="s2">&quot;orient&quot;</span>: <span class="s2">&quot;bottom&quot;</span>, <span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;xscale&quot;</span><span class="o">}</span>
+  <span class="o">]</span>,
+
+  <span class="s2">&quot;marks&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;group&quot;</span>,
+
+      <span class="s2">&quot;from&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;facet&quot;</span>: <span class="o">{</span>
+          <span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;data_countries&quot;</span>,
+          <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;facet&quot;</span>,
+          <span class="s2">&quot;groupby&quot;</span>: <span class="s2">&quot;category&quot;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
+
+      <span class="s2">&quot;encode&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;enter&quot;</span>: <span class="o">{</span>
+          <span class="s2">&quot;y&quot;</span>: <span class="o">{</span><span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;yscale&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;category&quot;</span><span class="o">}</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
+
+      <span class="s2">&quot;signals&quot;</span>: <span class="o">[</span>
+        <span class="o">{</span><span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;height&quot;</span>, <span class="s2">&quot;update&quot;</span>: <span class="s2">&quot;bandwidth(&#39;yscale&#39;)&quot;</span><span class="o">}</span>
+      <span class="o">]</span>,
+
+      <span class="s2">&quot;scales&quot;</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;pos&quot;</span>,
+          <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;band&quot;</span>,
+          <span class="s2">&quot;range&quot;</span>: <span class="s2">&quot;height&quot;</span>,
+          <span class="s2">&quot;domain&quot;</span>: <span class="o">{</span><span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;facet&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;position&quot;</span><span class="o">}</span>
+        <span class="o">}</span>
+      <span class="o">]</span>,
+
+      <span class="s2">&quot;marks&quot;</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;bars&quot;</span>,
+          <span class="s2">&quot;from&quot;</span>: <span class="o">{</span><span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;facet&quot;</span><span class="o">}</span>,
+          <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;rect&quot;</span>,
+          <span class="s2">&quot;encode&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;enter&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;y&quot;</span>: <span class="o">{</span><span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;pos&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;position&quot;</span><span class="o">}</span>,
+            <span class="s2">&quot;height&quot;</span>: <span class="o">{</span><span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;pos&quot;</span>, <span class="s2">&quot;band&quot;</span>: <span class="m">1</span><span class="o">}</span>,
+            <span class="s2">&quot;x&quot;</span>: <span class="o">{</span><span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;xscale&quot;</span>, <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;value&quot;</span><span class="o">}</span>,
+            <span class="s2">&quot;x2&quot;</span>: <span class="o">{</span><span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;xscale&quot;</span>, <span class="s2">&quot;value&quot;</span>: <span class="m">1</span><span class="o">}</span>,
+            <span class="s2">&quot;fill&quot;</span>: <span class="o">{</span><span class="s2">&quot;scale&quot;</span>: <span class="s2">&quot;color&quot;</span>,<span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;position&quot;</span><span class="o">}</span>
+            <span class="o">}</span>
+          <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;text&quot;</span>,
+          <span class="s2">&quot;from&quot;</span>: <span class="o">{</span><span class="s2">&quot;data&quot;</span>: <span class="s2">&quot;bars&quot;</span><span class="o">}</span>,
+          <span class="s2">&quot;encode&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;enter&quot;</span>: <span class="o">{</span>
+              <span class="s2">&quot;x&quot;</span>: <span class="o">{</span><span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;x2&quot;</span>, <span class="s2">&quot;offset&quot;</span>: -5<span class="o">}</span>,
+              <span class="s2">&quot;y&quot;</span>: <span class="o">{</span><span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;y&quot;</span>, <span class="s2">&quot;offset&quot;</span>: <span class="o">{</span><span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;height&quot;</span>, <span class="s2">&quot;mult&quot;</span>: <span class="m">0</span>.5<span class="o">}}</span>,
+              <span class="s2">&quot;fill&quot;</span>: <span class="o">[</span>
+                <span class="o">{</span><span class="s2">&quot;value&quot;</span>: <span class="s2">&quot;black&quot;</span><span class="o">}</span>
+              <span class="o">]</span>,
+              <span class="s2">&quot;align&quot;</span>: <span class="o">{</span><span class="s2">&quot;value&quot;</span>: <span class="s2">&quot;right&quot;</span><span class="o">}</span>,
+              <span class="s2">&quot;baseline&quot;</span>: <span class="o">{</span><span class="s2">&quot;value&quot;</span>: <span class="s2">&quot;middle&quot;</span><span class="o">}</span>,
+              <span class="s2">&quot;text&quot;</span>: <span class="o">{</span><span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;datum.value&quot;</span><span class="o">}</span>
+            <span class="o">}</span>
+          <span class="o">}</span>
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">&quot;config&quot;</span>: <span class="o">{}</span>
+<span class="o">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="data:image/png;base64,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" alt="visualization.png"></p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+</main>
