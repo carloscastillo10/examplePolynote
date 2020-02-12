@@ -19,29 +19,47 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="INSTALACI&#211;N-LINUX">INSTALACI&#211;N LINUX<a class="anchor-link" href="#INSTALACI&#211;N-LINUX"> </a></h1><p style="text-align: justify;">Polynote actualmente solo se prueba en Linux y MacOS, utilizando el navegador Chrome como cliente</p><h3 id="Instalaci&#243;n:">Instalaci&#243;n:<a class="anchor-link" href="#Instalaci&#243;n:"> </a></h3><ul>
-<li><p>Desactive Spark donde quiera y configure su entorno para que <strong>SPARK_HOME</strong> apunte a la ubicación de Spark.</p>
+<h1 id="INSTALACI&#211;N-LINUX">INSTALACI&#211;N LINUX<a class="anchor-link" href="#INSTALACI&#211;N-LINUX"> </a></h1><p style="text-align: justify;">Polynote actualmente solo se prueba en Linux y MacOS, utilizando el navegador Chrome como cliente</p><h3 id="Instalaci&#243;n:">Instalaci&#243;n:<a class="anchor-link" href="#Instalaci&#243;n:"> </a></h3><ol>
+<li><p>Descargue lo siguiente:</p>
+<ul>
+<li><p><a href="https://github.com/polynote/polynote/releases/download/0.2.13/polynote-dist-2.12.tar.gz">Polynote</a></p>
 </li>
-<li><p>Luego agregue <code>$PARK_HOME/bin/</code> a su PATH.</p>
+<li><p><a href="https://apache.ups.edu.ec/dist/spark/spark-3.0.0-preview2/spark-3.0.0-preview2-bin-hadoop2.7.tgz">Apache Spark</a></p>
 </li>
-<li><p>También necesitara un <strong>JDK instalado</strong> y <strong>JAVA_HOME</strong> configurado correctamente.</p>
+<li><p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java</a> (Seleccione según su sistema operativo) o <code>sudo apt-get install default-jdk</code> (Esto instala Java11 por defecto).</p>
 </li>
 </ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✨ Comience por un <code>sudo apt-get update</code> para actualizar todos los repositorios.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✨ Instale Java (Esto instala Java11 por defecto) <code>sudo apt-get install default-jdk</code>.</p>
+</li>
+</ol>
+<ol>
+<li><p>Abra el terminal y vaya a la ubicación de descarga:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> Users/user_name/Downloads
+</pre></div>
+</li>
+<li><p>Descomprima el archivo tar:</p>
+<div class="highlight"><pre><span></span>tar -zxvpf polynote-dist.tar.gz
+</pre></div>
+</li>
+<li><p>Desempaquete el archivo Apache Spark:</p>
+<div class="highlight"><pre><span></span>tar -zxvpf spark-2.4.4-bin-hadoop2.7.tgz
+<span class="nb">cd</span> polynote
+</pre></div>
+<p><strong><em>Nota:</em></strong></p>
 <ul>
-<li><p><a href="https://github.com/polynote/polynote/releases/download/0.2.13/polynote-dist-2.12.tar.gz">Descargue polynote</a> y luego <code>tar -zxvpf polynote-dist.tar.gz</code>.</p>
+<li>Cambie <code>user_name</code> por su nombre de usuario.</li>
+<li><p>Cambie <code>jdk1.8.0_191.jdk</code> dentro de la variable de ruta JAVA_HOME con la versión que instaló en su sistema. Para verificar la versión, puede ejecutar <code>java -version</code> en una terminal.</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SPARK_HOME</span><span class="o">=</span>/Users/user_name/Downloads/spark-2.4.4-bin-hadoop2.7
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:</span><span class="nv">$SPARK_HOME</span><span class="s2">/bin:</span><span class="nv">$SPARK_HOME</span><span class="s2">/sbin&quot;</span>
+</pre></div>
 </li>
-<li><p><a href="https://apache.ups.edu.ec/dist/spark/spark-3.0.0-preview2/spark-3.0.0-preview2-bin-hadoop2.7.tgz">Descargue spark</a>, y a continuación <code>tar -zxvf spark-2.4.4-bin-hadoop2.7.tgz</code>.</p>
+</ul>
 </li>
-<li><p>Establezca <code>JAVA_HOME: export JAVA_HOME=/usr/lib/jvm/default-java/</code></p>
-</li>
-<li><p>Establezca <code>SPARK_HOME: export SPARK_HOME=`pwd`/spark-2.4.4-bin-hadoop2.7/</code></p>
-</li>
-<li><p>Establezca PATH: <code>export PATH="PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin"</code></p>
-</li>
-<li><p>Compruebe si spark está configurado correctamente, al ejecutar <code>spark-submit</code>, debería ver información de uso.</p>
-</li>
+</ol>
+<ul>
+<li>Compruebe si spark está configurado correctamente, al ejecutar <code>spark-submit</code>, debería ver información de uso.</li>
 </ul>
 <h3 id="Configuraci&#243;n">Configuraci&#243;n<a class="anchor-link" href="#Configuraci&#243;n"> </a></h3><ul>
 <li><p style="text-align: justify;">Compatibilidad con Python: para ejecutar el código de Python, necesitará tener instalado una versión de <strong>Python 3</strong> y <strong>pip</strong> o <strong>pip3</strong>.</p></li>

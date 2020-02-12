@@ -61,7 +61,7 @@
       url: /desarrollo/python/python_interactive
       not_numbered: true
     - title: SCALA
-      # url: 
+      url: /desarrollo/scala/scala
       not_numbered: true
     - title: VEGA SPEC
       url: /desarrollo/vega_spec/vega-spec
