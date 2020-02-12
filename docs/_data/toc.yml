@@ -46,6 +46,9 @@
   - title: LINUX
     url: /instalacion/linux
     not_numbered: true
+  - title: MAC
+    url: /instalacion/mac
+    not_numbered: true
 
 - divider: true
 
