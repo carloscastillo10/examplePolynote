@@ -58,7 +58,7 @@
   expand_sections: true
   sections:
     - title: PYTHON
-      url: /desarrollo//python/pruebaNotebook
+      url: /desarrollo//python/python_interactive
       not_numbered: true
     - title: SCALA
       # url: 
